@@ -25,5 +25,10 @@ if (!file.exists(fileNameCleanDates)) {
    household.power.consumption <- read.csv(fileNameCleanDates, header=TRUE)   
 }
 
+png(filename = "plot1.png", width = 480, height = 480)
+    
 # histogram; change color, add labels for x axis and add title
 hist(household.power.consumption$Global_active_power, col = "red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
+
+dev.off()
+
