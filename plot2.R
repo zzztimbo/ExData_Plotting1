@@ -25,4 +25,13 @@ if (!file.exists(fileNameCleanDates)) {
    household.power.consumption <- read.csv(fileNameCleanDates, header=TRUE)   
 }
 
+sapply(household.power.consumption,class)
+household.power.consumption <- transform(household.power.consumption, Timestamp=as.POSIXct(paste(Date, Time), format="%Y-%m-%d %H:%M:%S"))
 
+
+
+png(filename = "plot2.png", width = 480, height = 480)
+
+with(household.power.consumption, plot(Timestamp, Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)"))
+
+dev.off()
