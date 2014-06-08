@@ -25,4 +25,23 @@ if (!file.exists(fileNameCleanDates)) {
    household.power.consumption <- read.csv(fileNameCleanDates, header=TRUE)   
 }
 
+sapply(household.power.consumption,class)
+household.power.consumption <- transform(household.power.consumption, Timestamp=as.POSIXct(paste(Date, Time), format="%Y-%m-%d %H:%M:%S"))
 
+
+png(filename = "plot3.png", width = 480, height = 480)
+
+with(household.power.consumption, plot(Timestamp, Sub_metering_1, type="n", ylab="Energy sub metering", xlab=""))
+
+
+with(household.power.consumption, lines(Timestamp, Sub_metering_1))
+
+
+with(household.power.consumption, lines(Timestamp, Sub_metering_2, col="red"))
+
+
+with(household.power.consumption, lines(Timestamp, Sub_metering_3, col="blue"))
+
+legend("topright", lty=1, lwd=1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
+dev.off()
